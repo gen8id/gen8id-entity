@@ -1,9 +1,9 @@
 package id.g8id.api.entt.fo
 
-import ai.bitflow.api.comn.antn.NoArg
-import ai.bitflow.api.comn.util.GsonExt
 import com.paypal.payouts.CreatePayoutResponse
 import com.paypal.payouts.PayoutBatch
+import id.g8id.api.antn.NoArg
+import id.g8id.api.util.GsonExt
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import java.time.LocalDateTime
