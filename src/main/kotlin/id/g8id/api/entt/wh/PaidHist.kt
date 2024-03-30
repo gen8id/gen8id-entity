@@ -1,9 +1,9 @@
-package ai.bitflow.api.comn.entt
+package id.g8id.api.entt.wh.entt
 
-import ai.bitflow.api.comn.cnst.BotUser
-import ai.bitflow.api.comn.cnst.ContentType
-import ai.bitflow.api.comn.data.*
-import ai.bitflow.api.comn.rqst.*
+import id.g8id.api.cnst.BotUser
+import id.g8id.api.cnst.ContentType
+import id.g8id.api.data.*
+import id.g8id.api.rqst.*
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import io.quarkus.panache.common.Parameters

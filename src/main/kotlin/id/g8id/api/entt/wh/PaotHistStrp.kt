@@ -1,7 +1,7 @@
-package ai.bitflow.api.comn.entt
+package id.g8id.api.entt.wh.entt
 
-import ai.bitflow.api.comn.data.StrpReversals
-import ai.bitflow.api.comn.util.GsonExt
+import id.g8id.api.data.StrpReversals
+import id.g8id.api.util.GsonExt
 import com.stripe.model.Transfer
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity

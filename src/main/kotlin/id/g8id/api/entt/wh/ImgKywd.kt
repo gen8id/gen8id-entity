@@ -1,6 +1,6 @@
 package id.g8id.api.bo.entt
 
-import ai.bitflow.api.comn.util.TimeUtil
+import id.g8id.api.util.TimeUtil
 import id.g8id.api.bo.cnst.KywdGrup
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity

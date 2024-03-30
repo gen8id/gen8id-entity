@@ -1,6 +1,6 @@
 package id.g8id.api.entt.bo
 
-import id.g8id.api.data.ImgSorcItem
+import id.g8id.api.data.RqstImgPmpt
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import java.text.DecimalFormat
@@ -54,7 +54,7 @@ class RqstImgGrup : PanacheMongoEntity {
   var ctntCnt: Int? = null
 
   var celbList: List<String>? = null
-  var inptImgList: MutableList<ImgSorcItem>? = null
+  var pmptImgList: MutableList<RqstImgPmpt>? = null
   var prvdCd: String? = null
   var titl: String? = null
   var pstvPmpt: String? = null

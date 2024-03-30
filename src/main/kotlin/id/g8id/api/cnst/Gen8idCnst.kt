@@ -75,11 +75,6 @@ val CLAIM_CODES = mutableListOf(
   , UserClaim.NOT_CELEBRITY_CONTENTS
 )
 
-object CreatorRegistStat {
-  const val IN_REVIEW  = "CTST0002"
-  const val VERIFIED   = "CTST0003"
-}
-
 object CreatorAdvantage {
   const val NONE            = "CTAT0000"
   const val IGNORE_APPROVAL = "CTAT0001"
@@ -99,14 +94,6 @@ object CreatorGrade {
   const val LEVEL_10   = "CTGD0010"
   const val LEVEL_11   = "CTGD0011"
   const val LEVEL_12   = "CTGD0012"
-//  const val LEVEL_13 = "CTGD0012"
-//  const val LEVEL_14 = "CTGD0013"
-//  const val LEVEL_15 = "CTGD0014"
-//  const val LEVEL_16 = "CTGD0015"
-//  const val LEVEL_17 = "CTGD0016"
-//  const val LEVEL_18 = "CTGD0017"
-//  const val LEVEL_19 = "CTGD0018"
-//  const val LEVEL_20 = "CTGD0019"
 }
 
 object CreatorDetail {
@@ -150,25 +137,26 @@ val ART_CATOGORIES = arrayOf(
 )
 
 val ART_STYLES = arrayOf(
-"Cartoon"
-, "Realistic"
-, "Photo"
-, "Retro"
-, "Pixel art"
-, "8bit game"
-, "2bit game"
-, "Chinese ink brush"
-, "Renaissance art"
-, "Modern art"
-, "Pop art"
-, "Anime"
-, "Comics"
-, "Manga"
-, "4cut"
-, "Painting"
-, "Sticker"
-, "Multi cut"
-, "Figure"
-, "Minecraft"
-, "Origami"
+  "Cartoon"
+  , "Realistic"
+  , "Photo"
+  , "Retro"
+  , "Pixel art"
+  , "8bit game"
+  , "2bit game"
+  , "Chinese ink brush"
+  , "Renaissance art"
+  , "Modern art"
+  , "Pop art"
+  , "Anime"
+  , "Comics"
+  , "Manga"
+  , "4cut"
+  , "Painting"
+  , "Sticker"
+  , "Multi cut"
+  , "Figure"
+  , "Minecraft"
+  , "Origami"
+  , "ASCII art"
 )

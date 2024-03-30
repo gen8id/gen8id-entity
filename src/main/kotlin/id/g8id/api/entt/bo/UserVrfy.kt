@@ -1,7 +1,7 @@
 package id.g8id.api.entt.bo
 
-import ai.bitflow.api.comn.data.UserVrfyData
-import ai.bitflow.api.comn.rqst.HyprWletIdvdBsicInfo
+import id.g8id.api.entt.data.UserVrfyData
+import id.g8id.api.entt.rqst.HyprWletIdvdBsicInfo
 import com.hyperwallet.clientsdk.model.HyperwalletLink
 import com.hyperwallet.clientsdk.model.HyperwalletUser
 import com.hyperwallet.clientsdk.model.HyperwalletVerificationDocument
@@ -141,7 +141,6 @@ class UserVrfy() : PanacheMongoEntity() {
   var timeZone: String? = null
   var documents: List<HyperwalletVerificationDocument>? = null
   var links: List<HyperwalletLink>? = null
-
 
   companion object: PanacheMongoCompanion<UserVrfy> {
 

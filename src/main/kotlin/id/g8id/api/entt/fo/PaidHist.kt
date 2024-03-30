@@ -3,11 +3,8 @@ package id.g8id.api.entt.fo
 import id.g8id.api.cnst.BotUser
 import id.g8id.api.cnst.PadlWbhkEvnt
 import id.g8id.api.cnst.Purchase
-import id.g8id.api.data.PadlChckOut
-import id.g8id.api.data.PadlPamts
-import id.g8id.api.data.PadlTrnxDetl
 import id.g8id.api.cnst.ContentType
-import id.g8id.api.data.PadlTrnxWbhkData
+import id.g8id.api.data.*
 import id.g8id.api.rqst.*
 import id.g8id.api.rqst.PadlCstm
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
@@ -182,6 +179,31 @@ class PaidHist : PanacheMongoEntity {
   }
 
   companion object: PanacheMongoCompanion<PaidHist> {
+
+    fun getPaidSum(list: List<id.g8id.api.entt.bo.PaidHist>): PaidSum {
+      val sum = PaidSum()
+      list.forEach {
+        val total = it.details?.payoutTotals
+        if (total != null) {
+          sum.earnings += total.earnings!!.toDouble()
+          sum.fee += total.fee!!.toDouble()
+          sum.discount += total.discount!!.toDouble()
+          sum.tax += total.tax!!.toDouble()
+          sum.grandTotal += total.grandTotal!!.toDouble()
+        }
+      }
+
+      sum.apply {
+        earnings /= 100
+        fee /= 100
+        discount /= 100
+        tax /= 100
+        grandTotal /= 100
+      }
+      sum.grandTotal = String.format("%.2f", sum.grandTotal).toDouble()
+
+      return sum
+    }
 
     fun findAllByUserId(userId: String): List<PaidHist> {
       return find("userId", userId).list()

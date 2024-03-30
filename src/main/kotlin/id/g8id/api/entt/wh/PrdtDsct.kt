@@ -1,4 +1,4 @@
-package ai.bitflow.api.comn.entt
+package id.g8id.api.entt.wh.entt
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion

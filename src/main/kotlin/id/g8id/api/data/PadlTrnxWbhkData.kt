@@ -1,6 +1,6 @@
 package id.g8id.api.data
 
-import ai.bitflow.api.comn.rqst.PaidCstmData
+import id.g8id.api.rqst.PaidCstmData
 import com.google.gson.annotations.SerializedName
 
 class PadlTrnxWbhkData() {

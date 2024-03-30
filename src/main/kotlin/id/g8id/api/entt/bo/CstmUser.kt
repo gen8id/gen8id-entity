@@ -1,13 +1,12 @@
 package id.g8id.api.entt.bo
 
-
-import ai.bitflow.api.comn.antn.NoArg
-import ai.bitflow.api.comn.cnst.*
-import ai.bitflow.api.comn.rqst.CstmUserSearchRqst
-import ai.bitflow.api.comn.rqst.CstmUserSignInRqst
+import id.g8id.api.antn.NoArg
 import id.g8id.api.cnst.CreatorAdvantage
-import id.g8id.api.cnst.CreatorRegistStat
 import id.g8id.api.cnst.UserAgeVerify
+import id.g8id.api.cnst.UserStatus
+import id.g8id.api.expt.CstmUserPswdNotSetException
+import id.g8id.api.rqst.CstmUserEmalSginRqst
+import id.g8id.api.rqst.CstmUserSrchRqst
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import io.quarkus.mongodb.panache.kotlin.PanacheQuery
@@ -71,7 +70,7 @@ class CstmUser : PanacheMongoEntity {
 
   var pwErrCnt: Int = 0
   var stts: String? = null
-  var ageVrfyCd: String? = UserAgeVerify.NO
+  var ageVrfyCd: String? = UserAgeVerify.NOT_VERIFIED
   var crtrGrad: String? = null
   var userAgnt: String? = null
 
@@ -112,7 +111,7 @@ class CstmUser : PanacheMongoEntity {
   var phtoUrl: String? = null
   var selrJoinStep: String? = null
   var buyrGrad: String? = null
-  var crtrRgstStts: String? = CreatorRegistStat.NO
+  var crtrRgstStts: String? = UserAgeVerify.NOT_VERIFIED
   var crtrAvtg: String? = CreatorAdvantage.NONE
   var userClass: String? = null
   var dormDttm: LocalDateTime? = null
@@ -135,17 +134,17 @@ class CstmUser : PanacheMongoEntity {
       param.persist()
     }
 
-    fun getUsers(param: CstmUserSearchRqst): List<CstmUser> {
+    fun getUsers(param: CstmUserSrchRqst): List<CstmUser> {
       val (query, params) = buildQueryAndParams(param)
       return find(query, Sort.by("rgstDttm").descending(), params).page(param.page - 1, 20).list()
     }
 
-    fun countUsers(param: CstmUserSearchRqst): Long {
+    fun countUsers(param: CstmUserSrchRqst): Long {
       val (query, params) = buildQueryAndParams(param)
       return count(query, params)
     }
 
-    private fun buildQueryAndParams(param: CstmUserSearchRqst): Pair<String, MutableMap<String, Any?>> {
+    private fun buildQueryAndParams(param: CstmUserSrchRqst): Pair<String, MutableMap<String, Any?>> {
       val params = param.toRqstMap()
       val queryParts: MutableList<String> = ArrayList()
       if (params["dispName"] != null) queryParts.add("dispName like :dispName")
@@ -176,7 +175,8 @@ class CstmUser : PanacheMongoEntity {
       return CstmUser.delete("_id in ?1", ids)
     }
 
-    fun findByUserIdAndPswd(param: CstmUserSignInRqst): CstmUser? {
+    @Throws(CstmUserPswdNotSetException::class)
+    fun findByUserIdAndPswd(param: CstmUserEmalSginRqst): CstmUser? {
 
       val item = CstmUser.find("userId", param.userId).firstResult()
 

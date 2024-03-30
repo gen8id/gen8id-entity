@@ -1,6 +1,6 @@
 package id.g8id.api.entt.bo
 
-import ai.bitflow.api.comn.antn.NoArg
+import id.g8id.api.antn.NoArg
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity

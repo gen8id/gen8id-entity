@@ -1,6 +1,6 @@
 package id.g8id.api.entt.bo
 
-import ai.bitflow.api.comn.rqst.AddCartRqst
+import id.g8id.api.rqst.AddCartRqst
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import java.time.LocalDateTime
@@ -14,9 +14,9 @@ class UserCart() : PanacheMongoEntity() {
     this.ctntType = param.ctntType
     this.titl = param.titl
     this.pblcThumUrl = param.pblcThumUrl
-    this.imgList = param.imgIdStrList
+    this.imgList = param.imgIdList
     this.totlPric = param.totlPric
-    this.imgCnt = if (!param.imgIdStrList.isNullOrEmpty()) { param.imgIdStrList!!.size } else { 0 }
+    this.imgCnt = if (!param.imgIdList.isNullOrEmpty()) { param.imgIdList!!.size } else { 0 }
   }
 
   constructor(userId: String, ctntType: String, grupId: String

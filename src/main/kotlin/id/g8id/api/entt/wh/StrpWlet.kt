@@ -1,9 +1,9 @@
-package ai.bitflow.api.comn.entt
+package id.g8id.api.entt.wh.entt
 
-import ai.bitflow.api.comn.cnst.BotUser
-import ai.bitflow.api.comn.cnst.StrpCnst
-import ai.bitflow.api.comn.data.StrpExtnAcnt
-import ai.bitflow.api.comn.util.GsonExt
+import id.g8id.api.cnst.BotUser
+import id.g8id.api.cnst.StrpCnst
+import id.g8id.api.data.StrpExtnAcnt
+import id.g8id.api.util.GsonExt
 import com.google.gson.annotations.SerializedName
 import com.stripe.model.Account
 import com.stripe.model.Person

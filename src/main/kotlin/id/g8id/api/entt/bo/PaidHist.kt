@@ -1,13 +1,17 @@
 package id.g8id.api.entt.bo
 
-import ai.bitflow.api.comn.cnst.BotUser
-import ai.bitflow.api.comn.data.*
-import ai.bitflow.api.comn.rqst.*
+import id.g8id.api.cnst.BotUser
 import id.g8id.api.cnst.ContentType
+import id.g8id.api.cnst.PadlWbhkEvnt
+import id.g8id.api.cnst.Purchase
+import id.g8id.api.data.*
+import id.g8id.api.rqst.*
+import id.g8id.api.rqst.PadlCstm
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import java.time.LocalDateTime
 import java.time.ZoneOffset
+import java.time.temporal.ChronoUnit
 
 class PaidHist : PanacheMongoEntity {
 
@@ -40,7 +44,7 @@ class PaidHist : PanacheMongoEntity {
   }
 
   constructor(
-    param: PadlWbhkData
+    param: PadlTrnxWbhkData
   ) : super() {
     this.transactionId = param.data.id
     this.status = param.data.status
@@ -82,7 +86,7 @@ class PaidHist : PanacheMongoEntity {
   }
 
   fun putWebhookData(
-    param: PadlWbhkData
+    param: PadlTrnxWbhkData
   ) {
     this.transactionId = param.data.id
     this.status = param.data.status
@@ -147,8 +151,35 @@ class PaidHist : PanacheMongoEntity {
 
   var ctntType: String? = ContentType.IMAGE
   var crtrGrad: String? = null
+  var feeRate: Int = 33
+
+  fun getConfirmationStatus(): String {
+    if (this.eventType == PadlWbhkEvnt.ADJUSTMENT_CREATED || this.eventType == PadlWbhkEvnt.ADJUSTMENT_UPDATED) {
+      return "Refunded"
+    }
+    val now = LocalDateTime.now(ZoneOffset.UTC)
+    val daysSincePurchase = ChronoUnit.DAYS.between(this.rgstDttm, now)
+    if (daysSincePurchase > 7) {
+      return Purchase.CONFIRMED
+    }
+    return Purchase.NOT_CONFIRMED
+  }
+
+  fun download() {
+    if (this.dnldDttm == null) {
+      this.dnldDttm = LocalDateTime.now(ZoneOffset.UTC)
+      this.update()
+    }
+  }
+
+  fun hasPmpt(): Boolean {
+    return this.details?.lineItems?.find {
+      it.product?.customData?.get("type") == "pmpt"
+    } != null
+  }
 
   companion object: PanacheMongoCompanion<PaidHist> {
+
     fun getPaidSum(list: List<PaidHist>): PaidSum {
       val sum = PaidSum()
       list.forEach {
@@ -172,6 +203,18 @@ class PaidHist : PanacheMongoEntity {
       sum.grandTotal = String.format("%.2f", sum.grandTotal).toDouble()
 
       return sum
+    }
+
+    fun findAllByUserId(userId: String): List<id.g8id.api.entt.fo.PaidHist> {
+      return id.g8id.api.entt.fo.PaidHist.find("userId", userId).list()
+    }
+
+    fun findConfirmedItem(crtrId: String): List<id.g8id.api.entt.fo.PaidHist> {
+      val sevenDaysAgo = LocalDateTime.now().minusDays(7)
+      return id.g8id.api.entt.fo.PaidHist.find(
+        "crtrId = ?1 and eventType = ?2 and rgstDttm < ?3",
+        crtrId, PadlWbhkEvnt.TRANSACTION_COMPLETED, sevenDaysAgo
+      ).list()
     }
 
   }

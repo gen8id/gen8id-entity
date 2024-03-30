@@ -1,11 +1,11 @@
-package ai.bitflow.api.comn.entt
+package id.g8id.api.entt.wh.entt
 
 
-import ai.bitflow.api.comn.cnst.UserStatus
-import ai.bitflow.api.comn.rqst.BofcSignInRqst
-import ai.bitflow.api.comn.rqst.BofcUserSearchRqst
-import ai.bitflow.api.comn.rqst.CodeRqst
-import ai.bitflow.api.comn.util.AuthUser
+import id.g8id.api.cnst.UserStatus
+import id.g8id.api.rqst.BofcSignInRqst
+import id.g8id.api.rqst.BofcUserSearchRqst
+import id.g8id.api.rqst.CodeRqst
+import id.g8id.api.util.AuthUser
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import org.bson.types.ObjectId

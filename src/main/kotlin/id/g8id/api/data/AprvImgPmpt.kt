@@ -2,7 +2,6 @@ package id.g8id.api.data
 
 import id.g8id.api.antn.NoArg
 
-
 @NoArg
 data class AprvImgPmpt (
   var wdth: Int? = null,

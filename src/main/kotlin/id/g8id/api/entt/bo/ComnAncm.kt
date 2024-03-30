@@ -1,6 +1,6 @@
 package id.g8id.api.entt.bo
 
-import ai.bitflow.api.comn.rqst.AncmSearchRqst
+import id.g8id.api.rqst.AncmSearchRqst
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import io.quarkus.panache.common.Sort

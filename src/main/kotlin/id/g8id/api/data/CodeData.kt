@@ -1,6 +1,6 @@
 package id.g8id.api.data
 
-import ai.bitflow.api.comn.entt.CodeMast
+import id.g8id.api.entt.fo.CodeMast
 import id.g8id.api.antn.NoArg
 import io.quarkus.mongodb.panache.common.ProjectionFor
 

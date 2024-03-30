@@ -1,6 +1,6 @@
 package id.g8id.api.entt.bo
 
-import ai.bitflow.api.comn.rqst.CstmUserSearchRqst
+import id.g8id.api.rqst.CstmUserSrchRqst
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import io.quarkus.panache.common.Sort
@@ -57,17 +57,17 @@ class CstmSginHist : PanacheMongoEntity {
   var pvdr: String? = null
 
   companion object: PanacheMongoCompanion<CstmSginHist> {
-    fun getSginHist(param: CstmUserSearchRqst): List<CstmSginHist> {
+    fun getSginHist(param: CstmUserSrchRqst): List<CstmSginHist> {
       val (query, params) = buildQueryAndParams(param)
       return find(query, Sort.by("rgstDttm").descending(), params).page(param.page - 1, 20).list()
     }
 
-    fun countSginHist(param: CstmUserSearchRqst): Long {
+    fun countSginHist(param: CstmUserSrchRqst): Long {
       val (query, params) = buildQueryAndParams(param)
       return count(query, params)
     }
 
-    private fun buildQueryAndParams(param: CstmUserSearchRqst): Pair<String, MutableMap<String, Any?>> {
+    private fun buildQueryAndParams(param: CstmUserSrchRqst): Pair<String, MutableMap<String, Any?>> {
       val params = param.toRqstMap()
       var queryParts: MutableList<String> = ArrayList()
       if(params["dispName"] != null) queryParts.add("dispName like :dispName")

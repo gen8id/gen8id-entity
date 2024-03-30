@@ -2,7 +2,6 @@ package id.g8id.api.entt.bo
 import id.g8id.api.cnst.CreatorDetail
 import id.g8id.api.data.AprvImgPmpt
 import id.g8id.api.data.ImgGrupNoPmpt
-import id.g8id.api.entt.AprvImgItem
 import id.g8id.api.rsps.ImgListRsps
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity

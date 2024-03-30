@@ -6,6 +6,7 @@ import jakarta.ws.rs.DefaultValue
 import jakarta.ws.rs.QueryParam
 import java.time.LocalDateTime
 
+@NoArg
 data class UserCupnRgstRqst(
   @NotBlank val cupnType: String,
   @NotBlank val actvPerd: Int,
@@ -27,6 +28,7 @@ data class UserCupnUpdtRqst(
 
 @NoArg
 open class UserCupnSrchRqst {
+
   @field: QueryParam("abutCupn") var abutCupn: String? = null
   @field: QueryParam("actv") var actv: Boolean? = null
   @field: QueryParam("cupnCode") var cupnCode: String? = null
@@ -42,4 +44,5 @@ open class UserCupnSrchRqst {
     paramList["asgnUserId"] = this.asgnUserId
     return paramList
   }
+
 }

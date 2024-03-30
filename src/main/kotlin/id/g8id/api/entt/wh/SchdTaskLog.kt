@@ -1,7 +1,7 @@
-package ai.bitflow.api.comn.entt
+package id.g8id.api.entt.wh.entt
 
-import ai.bitflow.api.comn.cnst.ScheduleTask
-import ai.bitflow.api.comn.util.TimeUtil
+import id.g8id.api.cnst.ScheduleTask
+import id.g8id.api.util.TimeUtil
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import java.time.LocalDateTime

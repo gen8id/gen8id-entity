@@ -1,6 +1,6 @@
 package id.g8id.api.entt.bo
 
-import ai.bitflow.api.comn.data.CodeData
+import id.g8id.api.data.CodeData
 import io.quarkus.cache.CacheInvalidate
 import io.quarkus.cache.CacheKey
 import io.quarkus.cache.CacheResult

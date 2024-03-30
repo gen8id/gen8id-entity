@@ -1,4 +1,4 @@
-package ai.bitflow.api.comn.entt
+package id.g8id.api.entt.wh.entt
 
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import java.time.LocalDateTime

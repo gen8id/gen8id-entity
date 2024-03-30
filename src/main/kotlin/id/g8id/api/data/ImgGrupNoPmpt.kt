@@ -1,6 +1,6 @@
 package id.g8id.api.data
 
-import id.g8id.api.entt.RqstImgGrup
+import id.g8id.api.entt.fo.RqstImgGrup
 import io.quarkus.mongodb.panache.common.ProjectionFor
 import java.time.LocalDateTime
 

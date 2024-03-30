@@ -20,6 +20,7 @@ data class BofcSignInRqst (
   , var city: String?
   , var pfrm: String?
   , var lang: String?
+  , var pvdr: String?
 )
 
 @NoArg

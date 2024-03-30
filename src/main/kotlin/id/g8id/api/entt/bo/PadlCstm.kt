@@ -1,6 +1,5 @@
 package id.g8id.api.entt.bo
 
-
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import java.time.LocalDateTime

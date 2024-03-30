@@ -1,7 +1,7 @@
 package id.g8id.api.entt.fo
 
 import id.g8id.api.cnst.ContentAgeGrade
-import id.g8id.api.entt.AprvImgItem
+import id.g8id.api.entt.bo.AcivImgItem
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import java.text.DecimalFormat
@@ -120,7 +120,7 @@ class AcivImgItem : PanacheMongoEntity {
    *    weights: { pstvPmpt: 10, cptn: 8, crtrMesg: 7, kywdList: 6, celbList: 5, colorNms: 4
    *    , modrList: 3 }, name: "idx-temp-imgs" });
    */
-  companion object: PanacheMongoCompanion<AprvImgItem> {
+  companion object: PanacheMongoCompanion<AcivImgItem> {
 
 
   }

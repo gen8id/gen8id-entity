@@ -1,9 +1,9 @@
-package ai.bitflow.api.comn.entt
+package id.g8id.api.entt.wh.entt
 
-import ai.bitflow.api.comn.cnst.BotUser
-import ai.bitflow.api.comn.data.PadlRfndWbhkData
-import ai.bitflow.api.comn.data.RfndItem
-import ai.bitflow.api.comn.data.Totals
+import id.g8id.api.cnst.BotUser
+import id.g8id.api.data.PadlRfndWbhkData
+import id.g8id.api.data.RfndItem
+import id.g8id.api.data.Totals
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import java.time.LocalDateTime
