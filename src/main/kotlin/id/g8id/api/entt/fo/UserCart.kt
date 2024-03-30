@@ -1,7 +1,7 @@
 package id.g8id.api.entt.fo
 
-import ai.bitflow.api.comn.rqst.AddCartRqst
-import ai.bitflow.api.comn.rqst.PadlItem
+import id.g8id.api.rqst.AddCartRqst
+import id.g8id.api.rqst.PadlItem
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import io.quarkus.panache.common.Parameters

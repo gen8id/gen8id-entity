@@ -1,10 +1,10 @@
 package id.g8id.api.entt.fo
 
-import ai.bitflow.api.comn.data.StrpExtnAcnt
-import ai.bitflow.api.comn.util.GsonExt
 import com.google.gson.annotations.SerializedName
 import com.stripe.model.Account
 import com.stripe.model.Person
+import id.g8id.api.data.StrpExtnAcnt
+import id.g8id.api.util.GsonExt
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import java.time.LocalDateTime

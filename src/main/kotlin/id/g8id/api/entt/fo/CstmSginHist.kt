@@ -1,12 +1,11 @@
 package id.g8id.api.entt.fo
 
-import ai.bitflow.api.comn.antn.NoArg
-import ai.bitflow.api.comn.rqst.CstmUserEmalSginRqst
+import id.g8id.api.antn.NoArg
+import id.g8id.api.rqst.CstmUserEmalSginRqst
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import java.time.LocalDateTime
 import java.time.ZoneOffset
-
 
 /**
  * customer user sign in history,

@@ -1,10 +1,10 @@
 package id.g8id.api.entt.fo
 
-import ai.bitflow.api.comn.rqst.AtwkLikeViewRqst
 import id.g8id.api.cnst.ContentType.AUDIO
 import id.g8id.api.cnst.ContentType.IMAGE
 import id.g8id.api.cnst.ContentType.TEXT
 import id.g8id.api.cnst.ContentType.VIDEO
+import id.g8id.api.rqst.AtwkLikeViewRqst
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import java.time.LocalDateTime

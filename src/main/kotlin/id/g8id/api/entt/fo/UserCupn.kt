@@ -1,4 +1,4 @@
-package id.g8id.api.entt.bo
+package id.g8id.api.entt.fo
 
 import id.g8id.api.rqst.UserCupnRgstRqst
 import id.g8id.api.rqst.UserCupnSrchRqst

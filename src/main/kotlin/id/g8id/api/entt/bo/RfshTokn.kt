@@ -1,4 +1,4 @@
-package src.main.kotlin.id.g8id.api.entt.bo
+package id.g8id.api.entt.bo
 
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity

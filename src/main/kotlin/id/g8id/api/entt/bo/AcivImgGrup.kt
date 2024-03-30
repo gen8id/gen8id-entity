@@ -1,6 +1,6 @@
-package src.main.kotlin.id.g8id.api.entt.bo
+package id.g8id.api.entt.bo
 
-import id.g8id.api.data.ImgSorcItem
+import id.g8id.api.data.AprvImgPmpt
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import java.time.LocalDateTime
@@ -61,7 +61,7 @@ class AcivImgGrup : PanacheMongoEntity {
   var ctntCnt: Int? = null
 
   var celbList: List<String>? = null
-  var inptImgList: MutableList<ImgSorcItem>? = null
+  var pmptImgList: MutableList<AprvImgPmpt>? = null
   var prvdCd: String? = null
   var titl: String? = null
   var pstvPmpt: String? = null
@@ -88,14 +88,10 @@ class AcivImgGrup : PanacheMongoEntity {
   var upscCd: String? = null
   var upscNm: String? = null
   var rcmd: Boolean = false
-  var rejtResn: RejtResn? = null
+
 
   companion object: PanacheMongoCompanion<AcivImgGrup> {
 
+
   }
 }
-
-data class RejtResn(
-  val resn: List<String>?,
-  val msg: String?,
-)

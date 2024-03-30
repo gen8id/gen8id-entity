@@ -1,4 +1,4 @@
-package src.main.kotlin.id.g8id.api.entt.bo
+package id.g8id.api.entt.bo
 
 import ai.bitflow.api.comn.cnst.KywdGrup
 import ai.bitflow.api.comn.util.TimeUtil

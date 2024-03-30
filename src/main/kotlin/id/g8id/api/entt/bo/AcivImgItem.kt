@@ -1,4 +1,4 @@
-package src.main.kotlin.id.g8id.api.entt.bo
+package id.g8id.api.entt.bo
 
 import id.g8id.api.cnst.ContentAgeGrade
 import id.g8id.api.entt.AprvImgItem
@@ -31,7 +31,7 @@ class AcivImgItem : PanacheMongoEntity {
     , qltyFcus: Double?
     , rgstId: String
     , cretDttm: LocalDateTime?
-    , colrRgbs: Map<String, Double>
+    , colrRgbList: Map<String, Double>
     , colrNms: Map<String, Double>
     , kywdList: MutableList<String>?
     , rgstStep: String
@@ -54,12 +54,16 @@ class AcivImgItem : PanacheMongoEntity {
     this.fileNmOrg = fileNmOrg
     this.finlKywdList = kywdList
     this.cptn = cptn
-    this.adjtResl = (wdth.toDouble() * hegt.toDouble() * (qltyFcus?.toDouble() ?: 0)).toLong()
+    if (qltyFcus != null) {
+      this.adjtResl = (wdth.toDouble() * hegt.toDouble() * qltyFcus.toDouble()).toLong()
+    } else {
+      this.adjtResl = (wdth.toDouble() * hegt.toDouble()).toLong()
+    }
     this.qltyFcus = qltyFcus
     this.rgstUserId = rgstId
     this.updtUserId = rgstId
     this.cretDttm = cretDttm
-    this.colrRgbs = colrRgbs
+    this.colrRgbList = colrRgbList
     this.colrNms = colrNms
     this.rgstStep = rgstStep
     this.rgstDttm = LocalDateTime.now(ZoneOffset.UTC)
@@ -97,7 +101,7 @@ class AcivImgItem : PanacheMongoEntity {
   var finlKywdList: MutableList<String>? = null
   var celbList: MutableList<String>? = null
   var modrList: MutableList<String>? = null // content moderation result
-  var colrRgbs: Map<String, Double>? = null
+  var colrRgbList: Map<String, Double>? = null
   var colrNms: Map<String, Double>? = null
 
   var prvdCd: String? = null

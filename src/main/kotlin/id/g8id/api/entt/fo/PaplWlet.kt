@@ -1,6 +1,5 @@
 package id.g8id.api.entt.fo
 
-
 import id.g8id.api.rsps.PaplUserAddr
 import id.g8id.api.rsps.PaplUserProfRsps
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion

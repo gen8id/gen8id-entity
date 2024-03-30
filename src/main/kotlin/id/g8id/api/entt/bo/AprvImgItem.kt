@@ -1,4 +1,4 @@
-package src.main.kotlin.id.g8id.api.entt.bo
+package id.g8id.api.entt.bo
 
 import id.g8id.api.cnst.ContentAgeGrade
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion

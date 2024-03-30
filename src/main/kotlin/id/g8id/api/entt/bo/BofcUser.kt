@@ -1,4 +1,4 @@
-package src.main.kotlin.id.g8id.api.entt.bo
+package id.g8id.api.entt.bo
 
 
 import ai.bitflow.api.comn.cnst.UserStatus

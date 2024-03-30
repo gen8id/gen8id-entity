@@ -1,7 +1,7 @@
 package id.g8id.api.entt.fo
 
-import ai.bitflow.api.comn.util.TimeUtil
 import id.g8id.api.cnst.CONTENT_TYPE_SHORT_ARR
+import id.g8id.api.util.TimeUtil
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import org.bson.types.ObjectId

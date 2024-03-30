@@ -1,4 +1,4 @@
-package id.g8id.api.entt
+package id.g8id.api.entt.fo
 
 import id.g8id.api.cnst.CreatorDetail
 import id.g8id.api.data.ImgGrupNoPmpt

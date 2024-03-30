@@ -1,11 +1,9 @@
 package id.g8id.api.entt.fo
 
-
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import java.time.LocalDateTime
 import java.time.ZoneOffset
-
 
 /**
  * ref. https://docs.hyperwallet.com/content/api/v4/resources/users/retrieve

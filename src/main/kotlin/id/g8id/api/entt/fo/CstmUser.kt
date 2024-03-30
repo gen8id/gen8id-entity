@@ -1,14 +1,13 @@
 package id.g8id.api.entt.fo
 
-
-import ai.bitflow.api.comn.antn.NoArg
-import ai.bitflow.api.comn.cnst.*
-import ai.bitflow.api.comn.rqst.CstmUserEmalSginRqst
-import ai.bitflow.api.comn.rqst.CstmUserSrchRqst
+import id.g8id.api.antn.NoArg
 import id.g8id.api.cnst.CreatorAdvantage
 import id.g8id.api.cnst.CreatorGrade
 import id.g8id.api.cnst.UserAgeVerify
+import id.g8id.api.cnst.UserStatus
 import id.g8id.api.expt.CstmUserPswdNotSetException
+import id.g8id.api.rqst.CstmUserEmalSginRqst
+import id.g8id.api.rqst.CstmUserSrchRqst
 import id.g8id.api.rsps.UserBascRsps
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
@@ -84,11 +83,6 @@ class CstmUser : PanacheMongoEntity {
   var padlAddrId: String? = null
   var padlBsnsId: String? = null
   var padlTaxIdfy: String? = null
-//  var hyprWletUserTokn: String? = null
-//  var hyprWletUserStat: HyprWletUserStatus? = null
-//  var hyprWletCretOn: LocalDateTime? = null
-//  var hyprWletClntUserId: String? = null
-//  var hyprWletPrflType: HyprWletProfileType? = null
   var rgstUserId: String? = null
   var updtUserId: String? = null
   var rgstDttm: LocalDateTime? = LocalDateTime.now(ZoneOffset.UTC)
@@ -116,28 +110,10 @@ class CstmUser : PanacheMongoEntity {
   var emalVrfy: Boolean? = false
   var rfshTokn: String? = null
   var setPassLatr: Boolean = true
-//  var telNo: String? = null
   var crtrAvtg: String? = CreatorAdvantage.NONE
   var dormDttm: LocalDateTime? = null
   var wtwlDttm: LocalDateTime? = null
   var pushKey: String? = null
-
-  /*
-  @BsonIgnore
-  val pvdsMap: Map<String, String> = mapOf(
-    "e" to "Email Id",
-    "f" to "Facebook",
-    "g" to "Google"
-  )
-
-  fun getProviders(): String {
-    val stringJoiner = StringJoiner(",")
-    this.pvds?.forEach {
-      stringJoiner.add(this.pvdsMap[it.toString()])
-    }
-    return stringJoiner.toString()
-  }
-  */
 
   companion object: PanacheMongoCompanion<CstmUser> {
 

@@ -1,4 +1,4 @@
-package src.main.kotlin.id.g8id.api.entt.bo
+package id.g8id.api.entt.bo
 
 import ai.bitflow.api.comn.util.TimeUtil
 import id.g8id.api.cnst.CONTENT_TYPE_SHORT_ARR

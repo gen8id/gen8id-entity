@@ -1,4 +1,4 @@
-package id.g8id.api.entt
+package id.g8id.api.entt.fo
 
 import id.g8id.api.rqst.SaveFltrRqst
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
