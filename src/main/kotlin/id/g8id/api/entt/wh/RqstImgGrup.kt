@@ -1,8 +1,14 @@
-package id.g8id.api.bo.entt
+package id.g8id.api.entt.wh
 
-import id.g8id.api.bo.data.ImgSrceItem
+import id.g8id.api.cnst.CreatorDetail
+import id.g8id.api.data.ImgGrupNoPmpt
+import id.g8id.api.data.RqstImgPmpt
+import id.g8id.api.entt.fo.RqstImgGrup
+import id.g8id.api.entt.fo.RqstImgItem
+import id.g8id.api.rsps.ImgListRsps
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
+import io.quarkus.panache.common.Sort
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 
@@ -16,9 +22,9 @@ class RqstImgGrup : PanacheMongoEntity {
     ctntType: String,
     topCtntAgeGrad: String,
     rgstStep: String,
-    aiSgstKywdList: List<String>,
-    modrList: List<String>,
-    qltyFcusAvrg: Float,
+    aiSgstKywdList: Set<String>,
+    modrMap: Map<String, List<String>>,
+    qltyFcusAvrg: Double,
     adjtReslAvrg: Long,
     ttpxAvrg: Long,
     bytsAvrg: Long,
@@ -28,8 +34,8 @@ class RqstImgGrup : PanacheMongoEntity {
     this.ctntType = ctntType
     this.topCtntAgeGrad = topCtntAgeGrad
     this.rgstStep = rgstStep
-    this.aiSgstKywdList = aiSgstKywdList
-    this.modrList = modrList
+    this.aiSgstKywds = aiSgstKywdList
+    this.modrMap = modrMap
     this.qltyFcusAvrg = qltyFcusAvrg
     this.adjtReslAvrg = adjtReslAvrg
     this.ttpxAvrg = ttpxAvrg
@@ -41,19 +47,17 @@ class RqstImgGrup : PanacheMongoEntity {
   lateinit var ctntType: String
   lateinit var topCtntAgeGrad: String
   lateinit var rgstStep: String
-  lateinit var modrList: List<String>
-  lateinit var aiSgstKywdList: List<String>
-  var userRemvKywdList: List<String>? = null
-  var userAdddKywdList: List<String>? = null
-  var finlKywdList: List<String>? = null
-  var qltyFcusAvrg: Float? = null
+  lateinit var modrMap: Map<String, List<String>>
+  lateinit var aiSgstKywds: Set<String>
+  var userRemvKywds: Set<String>? = null
+  var userAdedKywds: Set<String>? = null
+  var finlKywds: Set<String>? = null
+  var qltyFcusAvrg: Double? = null
   var adjtReslAvrg: Long? = null
   var ttpxAvrg: Long? = null
   var bytsAvrg: Long? = null
   var ctntCnt: Int? = null
 
-  var celbList: List<String>? = null
-  var inptImgList: MutableList<ImgSrceItem>? = null
   var prvdCd: String? = null
   var titl: String? = null
   var pstvPmpt: String? = null
@@ -62,16 +66,20 @@ class RqstImgGrup : PanacheMongoEntity {
   var modlCd: String? = null
   var modlNm: String? = null
 
-  var userDefnGradList: List<String>? = null
-  var climCdList: List<String>? = null
   var crtrId: String? = null
   var crtrMesg: String? = null
-  var baseGradImg: Map<String, Any>? = null
-  var baseGradPmpt: Map<String, Any>? = null
+  var initUpldFldr: String? = null
+  var baseGradImg: Map<String, Any>? = null   // Todo: removable
+  var baseGradPmpt: Map<String, Any>? = null  // Todo: removable
+  var userDefnGradList: List<String>? = null  // Todo:
+  var climCdList: List<String>? = null        // Todo:
+  var celbList: List<String>? = null
+  var pmptImgList: MutableList<RqstImgPmpt>? = null
+
   var pricIdImg: String? = null
   var pricIdPmpt: String? = null
   var ngtvPmpt: String? = null
-  var bofcRgst: Boolean = true
+  var bofcRgst: Boolean = false
 
   var upscCd: String? = null
   var upscNm: String? = null
@@ -82,18 +90,26 @@ class RqstImgGrup : PanacheMongoEntity {
   var rgstDttm: LocalDateTime = LocalDateTime.now(ZoneOffset.UTC)
   var updtDttm: LocalDateTime = LocalDateTime.now(ZoneOffset.UTC)
   var aprvDttm: LocalDateTime? = null
-
-  var aprvBySelf: Boolean? = null
+  var aprvBySelf: Boolean? = false
 
   companion object: PanacheMongoCompanion<RqstImgGrup> {
 
-    fun findAllByRgstStepBeforeDate(rgstStep: List<String>, dateTime: LocalDateTime): List<RqstImgGrup> {
-      val rqstImgGrups = find(
-        "rgstStep in ?1 and rgstDttm < ?2", rgstStep, dateTime
-      ).list()
+    fun findByCrtrIdAndRgstStep(crtrId: String, rgstStep: String): ImgListRsps<ImgGrupNoPmpt> {
+      val totlCnt = RqstImgGrup.find("crtrId = ?1 and rgstStep = ?2", crtrId, rgstStep).count().toInt()
+      val limit = if (totlCnt > CreatorDetail.COLLECTION_PER_PAGE) { CreatorDetail.COLLECTION_PER_PAGE } else { totlCnt }
+      val list = RqstImgGrup.find("crtrId = ?1 and rgstStep = ?2", Sort.descending("updtDttm"), crtrId, rgstStep)
+        .project(ImgGrupNoPmpt::class.java).list().subList(0, limit)
 
-      return rqstImgGrups
+      list.forEach { it ->
+        val item = RqstImgItem.find("grupId", it.grupId).firstResult()
+        if (item!=null) {
+          it.pblcThumUrl = item.pblcThumUrl
+        }
+      }
+
+      return ImgListRsps(list, totlCnt)
     }
 
   }
+
 }

@@ -1,6 +1,6 @@
-package id.g8id.api.bo.entt
+package id.g8id.api.entt.wh
 
-import id.g8id.api.bo.cnst.CtntAgeGrade
+import id.g8id.api.cnst.ContentAgeGrade
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import java.text.DecimalFormat
@@ -53,7 +53,11 @@ class AprvImgItem : PanacheMongoEntity {
     this.fileNmOrg = fileNmOrg
     this.finlKywdList = kywdList
     this.cptn = cptn
-    this.adjtResl = (wdth.toDouble() * hegt.toDouble() * (qltyFcus?.toDouble() ?: 0)).toLong()
+    if (qltyFcus!=null) {
+      this.adjtResl = (wdth.toDouble() * hegt.toDouble()).times(qltyFcus).toLong()
+    } else {
+      this.adjtResl = (wdth.toDouble() * hegt.toDouble()).toLong()
+    }
     this.qltyFcus = qltyFcus
     this.rgstUserId = rgstId
     this.updtUserId = rgstId
@@ -93,7 +97,7 @@ class AprvImgItem : PanacheMongoEntity {
   var updtDttm: LocalDateTime? = null
   var bofcRgst: Boolean = true
 
-  var ctntAgeGrad: String = CtntAgeGrade.EVERYONE
+  var ctntAgeGrad: String = ContentAgeGrade.EVERYONE
   var finlKywdList: MutableList<String>? = null
   var celbList: MutableList<String>? = null
   var modrList: MutableList<String>? = null // content moderation result

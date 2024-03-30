@@ -22,7 +22,7 @@ class AcivImgGrup : PanacheMongoEntity {
   constructor (
     grupId: String,
     ctntType: String,
-    ctntAgeGrad: String,
+    topCtntAgeGrad: String,
     rgstStep: String,
     aiSgstKywdList: List<String>,
     modrList: List<String>,
@@ -34,7 +34,7 @@ class AcivImgGrup : PanacheMongoEntity {
   ): super() {
     this.grupId = grupId
     this.ctntType = ctntType
-    this.ctntAgeGrad = ctntAgeGrad
+    this.topCtntAgeGrad = topCtntAgeGrad
     this.rgstStep = rgstStep
     this.aiSgstKywdList = aiSgstKywdList
     this.modrList = modrList
@@ -47,7 +47,7 @@ class AcivImgGrup : PanacheMongoEntity {
 
   lateinit var grupId: String
   lateinit var ctntType: String
-  lateinit var ctntAgeGrad: String
+  lateinit var topCtntAgeGrad: String
   lateinit var rgstStep: String
   lateinit var modrList: List<String>
   lateinit var aiSgstKywdList: List<String>

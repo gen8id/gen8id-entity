@@ -1,6 +1,7 @@
-package id.g8id.api.bo.entt
+package id.g8id.api.entt.wh
 
-import id.g8id.api.bo.cnst.CtntAgeGrade
+import id.g8id.api.cnst.ContentAgeGrade
+import id.g8id.api.entt.bo.AcivImgItem
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import java.text.DecimalFormat
@@ -53,7 +54,11 @@ class AcivImgItem : PanacheMongoEntity {
     this.fileNmOrg = fileNmOrg
     this.finlKywdList = kywdList
     this.cptn = cptn
-    this.adjtResl = (wdth.toDouble() * hegt.toDouble() * (qltyFcus?.toDouble() ?: 0)).toLong()
+    if (qltyFcus != null) {
+      this.adjtResl = (wdth.toDouble() * hegt.toDouble() * qltyFcus.toDouble()).toLong()
+    } else {
+      this.adjtResl = (wdth.toDouble() * hegt.toDouble()).toLong()
+    }
     this.qltyFcus = qltyFcus
     this.rgstUserId = rgstId
     this.updtUserId = rgstId
@@ -92,7 +97,7 @@ class AcivImgItem : PanacheMongoEntity {
   var updtDttm: LocalDateTime? = null
   var bofcRgst: Boolean = true
 
-  var ctntAgeGrad: String = CtntAgeGrade.EVERYONE
+  var ctntAgeGrad: String = ContentAgeGrade.EVERYONE
   var finlKywdList: MutableList<String>? = null
   var celbList: MutableList<String>? = null
   var modrList: MutableList<String>? = null // content moderation result
@@ -115,7 +120,7 @@ class AcivImgItem : PanacheMongoEntity {
    *    weights: { pstvPmpt: 10, cptn: 8, crtrMesg: 7, kywdList: 6, celbList: 5, colorNms: 4
    *    , modrList: 3 }, name: "idx-temp-imgs" });
    */
-  companion object: PanacheMongoCompanion<AprvImgItem> {
+  companion object: PanacheMongoCompanion<AcivImgItem> {
 
 
   }

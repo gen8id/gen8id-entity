@@ -1,6 +1,6 @@
-package id.g8id.api.bo.entt
+package id.g8id.api.entt.wh
 
-import id.g8id.api.bo.data.ImgSrceItem
+import id.g8id.api.data.AprvImgPmpt
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import java.time.LocalDateTime
@@ -61,7 +61,7 @@ class AcivImgGrup : PanacheMongoEntity {
   var ctntCnt: Int? = null
 
   var celbList: List<String>? = null
-  var inptImgList: MutableList<ImgSrceItem>? = null
+  var pmptImgList: MutableList<AprvImgPmpt>? = null
   var prvdCd: String? = null
   var titl: String? = null
   var pstvPmpt: String? = null

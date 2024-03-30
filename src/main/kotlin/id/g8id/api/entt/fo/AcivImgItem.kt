@@ -31,7 +31,7 @@ class AcivImgItem : PanacheMongoEntity {
     , qltyFcus: Double?
     , rgstId: String
     , cretDttm: LocalDateTime?
-    , colrRgbList: Map<String, Double>
+    , colrRgbs: Map<String, Double>
     , colrNms: Map<String, Double>
     , kywdList: MutableList<String>?
     , rgstStep: String
@@ -63,7 +63,7 @@ class AcivImgItem : PanacheMongoEntity {
     this.rgstUserId = rgstId
     this.updtUserId = rgstId
     this.cretDttm = cretDttm
-    this.colrRgbList = colrRgbList
+    this.colrRgbs = colrRgbs
     this.colrNms = colrNms
     this.rgstStep = rgstStep
     this.rgstDttm = LocalDateTime.now(ZoneOffset.UTC)
@@ -101,7 +101,7 @@ class AcivImgItem : PanacheMongoEntity {
   var finlKywdList: MutableList<String>? = null
   var celbList: MutableList<String>? = null
   var modrList: MutableList<String>? = null // content moderation result
-  var colrRgbList: Map<String, Double>? = null
+  var colrRgbs: Map<String, Double>? = null
   var colrNms: Map<String, Double>? = null
 
   var prvdCd: String? = null

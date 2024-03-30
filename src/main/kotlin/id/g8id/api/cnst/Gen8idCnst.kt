@@ -5,6 +5,11 @@ val TOP_KEYWORD_RANK_SIZE   = 20
 val SESSION_MINUTES         = 60 * 9
 val ACCESS_TOKEN_DURATION   = 5
 
+object ContentViewGradeSet {
+  val EVERYONE = mutableListOf(ContentAgeGrade.EVERYONE)
+  val TEEN = mutableListOf(ContentAgeGrade.EVERYONE, ContentAgeGrade.TEEN)
+}
+
 val FREQ_USED_CODES = arrayOf (
   CodeGrup.MIDJR_VERS
   , CodeGrup.NJJR_VERS
@@ -24,11 +29,6 @@ val FREQ_USED_CODES = arrayOf (
   , CodeGrup.IMAGE_ASPECT_RATIO
   , CodeGrup.PURCHASE_STATUS
 )
-
-object ContentViewGradeSet {
-  val EVERYONE = mutableListOf(ContentAgeGrade.EVERYONE)
-  val TEEN = mutableListOf(ContentAgeGrade.EVERYONE, ContentAgeGrade.TEEN)
-}
 
 object ArtSortOrderBy {
   const val LATEST     = "AORD0000" // aprvDttm desc
@@ -77,7 +77,7 @@ val CLAIM_CODES = mutableListOf(
 
 object CreatorAdvantage {
   const val NONE            = "CTAT0000"
-  const val IGNORE_APPROVAL = "CTAT0001"
+  const val SELF_APPROVAL = "CTAT0001"
 }
 
 object CreatorGrade {

@@ -1,11 +1,10 @@
-package id.g8id.api.entt.wh.entt
+package id.g8id.api.entt.wh
 
 
 import id.g8id.api.cnst.UserStatus
 import id.g8id.api.rqst.BofcSignInRqst
 import id.g8id.api.rqst.BofcUserSearchRqst
 import id.g8id.api.rqst.CodeRqst
-import id.g8id.api.util.AuthUser
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import org.bson.types.ObjectId

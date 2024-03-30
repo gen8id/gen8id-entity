@@ -1,10 +1,10 @@
 package id.g8id.api.entt.bo
 
-import id.g8id.api.entt.data.UserVrfyData
-import id.g8id.api.entt.rqst.HyprWletIdvdBsicInfo
 import com.hyperwallet.clientsdk.model.HyperwalletLink
 import com.hyperwallet.clientsdk.model.HyperwalletUser
 import com.hyperwallet.clientsdk.model.HyperwalletVerificationDocument
+import id.g8id.api.data.UserVrfyData
+import id.g8id.api.rqst.HyprWletIdvdBsicInfo
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import java.time.LocalDateTime

@@ -51,6 +51,8 @@ val IP_HEADER_CANDIDATES = arrayOf(
 
 object BotUser {
     const val PDDL_WBHK_USER = "!!PDDL-WBHK-USER!!"
+    const val STRP_WBHK_USER = "!!STRP-WBHK-USER!!"
+    const val PAPL_WBHK_USER = "!!PAPL-WBHK-USER!!"
 }
 
 object BackOfficePermission {
@@ -66,6 +68,24 @@ object BackOfficePermission {
         SYS_MGR,
         SUPER_ADM
     )
+}
+
+object AgeVerified {
+    const val NO      = "USVG0000"
+    const val TEEN    = "USVG0001"
+    const val ADULT   = "USVG0002"
+    const val ADULT_P = "USVG0003"
+}
+
+object CreatorRgstStats {
+    const val NO         = "CTST0000"
+    const val REQ_VERIFY = "CTST0001"
+    const val VERIFIED   = "CTST0002"
+}
+
+object UserClass {
+    const val GENERAL = "General"
+    const val CREATOR = "Creator"
 }
 
 object FrontOfficePermission {
@@ -113,6 +133,11 @@ object MessageDigestAlgorithm {
     const val SHA3_512    = "SHA3-512"
 }
 
+object HttpHeaders {
+    const val CDFL_CTRY = "cf-ipcountry" // gets when pass through Cloudflare CDN
+    const val CDFL_LANG = "cf-lang"      // custom defined by Bitflow
+}
+
 object Days {
     const val ONE = 1L
     const val TWO = 2L
@@ -127,6 +152,25 @@ object Seconds {
     const val SEC  = 1L
     const val DAY  = 86_500L
     const val WEEK = 604_800L
+}
+
+object Payoneer {
+    object Account {
+        object Status {
+            // Card/Account not issued
+            val NOT_ISSUED = 0
+            // Card issued but not activated
+            val ISSUED_NOT_ACTIVATED = 1
+            // Card/Account Issued and activated
+            val ACTIVATED = 2
+            // Card/Account blocked
+            val BLOCKED = 99
+            // Card cancelled
+            val CANCELLED = 100
+            // Card lost or stolen
+            val LOST_OR_STOLEN = 101
+        }
+    }
 }
 
 object CodeGrup {
@@ -148,6 +192,51 @@ object CodeGrup {
     val IMAGE_ASPECT_RATIO    = "APRT"
     val PURCHASE_STATUS       = "PCST"
 
+}
+
+object Paypal {
+    val TOKN_RQST_BODY = mapOf("grant_type" to "client_credentials")
+}
+
+object Cloudflare {
+    // ref. https://developers.cloudflare.com/rules/transform/managed-transforms/reference/
+    const val CF_IP          = "cf-ip"
+    const val CF_IPCITY      = "cf-city" // The visitor's city (value from the ip.src.city field).
+    const val CF_IPCOUNTRY   = "cf-country" // The visitor's country (value from the ip.src.country field).
+    const val CF_IPCONTINENT = "cf-continent" // The visitor's continent (value from the ip.src.continent field).
+    const val CF_REGION      = "cf-region" // The visitor's region (value from the ip.src.region field).
+    const val CF_PLATFORM    = "cf-platform"
+    const val CF_LANG        = "cf-lang"
+    const val CF_HOST        = "cf-host"
+
+    const val CF_REGION_CODE = "cf-region-code"  // The visitor's region code (value from the ip.src.region_code field).
+    const val CF_TIMEZONE    = "cf-timezone" //  The name of the visitor's timezone (value from the ip.src.timezone.name field).
+    const val CF_POSTALCODE  = "cf-postal-code" // The visitor’s postal code (value from the ip.src.postal_code field).
+}
+
+object Creator {
+    const val TYPE_INDIVIDUAL = "INDIVIDUAL"
+    const val TYPE_BUSINESS   = "BUSINESS"
+
+    const val GOVRN_ID_TYPE_PASSPORT = "PASSPORT"
+    const val GOVRN_ID_TYPE_ID_CARD  = "NATIONAL_ID_CARD"
+
+    const val BIZ_TYPE_CORP       = "CORPORATION"
+    const val BIZ_TYPE_PRIV       = "PRIVATE_COMPANY"
+    const val BIZ_TYPE_PARTNER    = "PARTNERSHIP"
+    const val BIZ_TYPE_NON_PROFIT = "NOT_FOR_PROFIT_ORGANIZATION"
+    const val BIZ_TYPE_GOV        = "GOVERNMENT_ENTITY"
+    const val BIZ_TYPE_PUBLIC     = "PUBLIC_COMPANY"
+
+}
+
+object ScheduleTask {
+    const val OLD_REQUEST_IMAGE = "SJTK0000" // Old request image deletion task (7d+)
+    const val OLD_REQUEST_DATA = "SJTK0001" // Old request data deletion (7d+)
+    const val OLD_CART_ITEM = "SJTK0002" // Old cart item data deletion (30d+)
+    const val OLD_ACCESS_DATA = "SJTK0003" // Old access data deletion (Back/Cstm user sign-in)
+    const val OLD_PAID_HISTORY = "SJTK0004" // Old paid history data deletion task (90d+)
+    const val CONFIRM_PAID_HISTORY = "SJTK0005" // Confirm paid history
 }
 
 object OgMeta {

@@ -1,10 +1,12 @@
-package id.g8id.api.entt.wh.entt
+package id.g8id.api.entt.wh
 
 
+import id.g8id.api.antn.NoArg
 import id.g8id.api.cnst.*
-import id.g8id.api.rqst.CstmUserSearchRqst
-import id.g8id.api.rqst.CstmUserSignInRqst
-import id.g8id.api.util.AuthUser
+import id.g8id.api.expt.CstmUserPswdNotSetException
+import id.g8id.api.rqst.CstmUserEmalSginRqst
+import id.g8id.api.rqst.CstmUserSrchRqst
+import id.g8id.api.rsps.UserBascRsps
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import io.quarkus.mongodb.panache.kotlin.PanacheQuery
@@ -15,7 +17,7 @@ import java.time.LocalDateTime
 import java.time.ZoneOffset
 
 
-class CstmUser : PanacheMongoEntity, AuthUser {
+class CstmUser : PanacheMongoEntity {
 
   constructor() : super()
 
@@ -32,10 +34,9 @@ class CstmUser : PanacheMongoEntity, AuthUser {
     this.userId = userId
     this.pswd = pswd
     this.emal = emal
-    this.userAgent = userAgent
+    this.userAgnt = userAgent
     this.rgstUserId = userId
     this.updtUserId = userId
-    this.crtrGrad = CreatorGrade.LEVEL_1
   }
 
   constructor(
@@ -44,64 +45,79 @@ class CstmUser : PanacheMongoEntity, AuthUser {
     emal: String,
     dispName: String?,
     moblNo: String?,
-    userAgent: String
+    userAgent: String,
+    selfItro: String?,
   ) : super() {
     this.userId = userId
     this.pswd = pswd
     this.emal = emal
     this.dispName = dispName
     this.moblNo = moblNo
-    this.userAgent = userAgent
+    this.userAgnt = userAgent
     this.rgstUserId = rgstUserId
     this.updtUserId = rgstUserId
-    this.crtrGrad = CreatorGrade.LEVEL_1
+    this.selfItro = selfItro
   }
 
-  var userId: String = ""
-  var firebaseUId: String? = null
-  var prvdGgle: String? = null
-  var prvdFcbk: String? = null
-  var prvdTwtr: String? = null
-  var prvdAppl: String? = null
-  var moblNo: String? = null
-  var emal: String = ""
-  var emailVerified: Boolean = false
-  var pswd: String? = null
-  override var rfshTokn: String? = null
-  var setPassLatr: Boolean = true
+  var userId: String? = null
   var dispName: String? = null
-  var userCi: String? = null
-  var pushKey: String? = null
-  var telNo: String? = null
+  var phtoUrl: String? = null
+  var fbseUid: String? = null  // User id in Firebase
+  var pvds: String = ""
+  var moblNo: String? = null
+  var emal: String? = null
+  var pswd: String? = null
   var lang: String? = null
-  var ctry: String? = null
-  var stte: String? = null
   var bofcRgst: Boolean = true
   var userStts: String? = null
-  var phtoUrl: String? = null
-  var pwErrCnt: Int = 0
-  var selrJoinStep: String? = null
-  var buyrGrde: String? = null
-  var crtrGrde: String? = null
-  var ageVrfyCd: String? = AgeVerified.NO
-  var crtrRgstStts: String? = CreatorRgstStats.NO
-  var crtrGrad: String? = null
-  var crtrAvtg: String? = CreatorAdvantage.NO_ADVNTG
-  var userClass: String? = null
+  var selfItro: String? = null
 
-  var hyprWletUserTokn: String? = null
-  var hyprWletUserStat: String? = null
-  var userAgent: String? = null
+  var pwErrCnt: Int = 0
+  var crtrGrad: String? = CreatorGrade.LEVEL_1
+  var userAgnt: String? = null
+
+  // Vendor specific data
+  var padlCstmId: String? = null
+  var padlAddrId: String? = null
+  var padlBsnsId: String? = null
+  var padlTaxIdfy: String? = null
   var rgstUserId: String? = null
   var updtUserId: String? = null
   var rgstDttm: LocalDateTime? = LocalDateTime.now(ZoneOffset.UTC)
   var updtDttm: LocalDateTime? = LocalDateTime.now(ZoneOffset.UTC)
-  var lastAccDttm: LocalDateTime? = null
+  var lastAccsDttm: LocalDateTime? = null
+  var accsIp: String? = null
+  var host: String? = null
+
+  // Address
+  var ctnt: String? = null
+  var natnCtry: String? = null
+  var accsCtnt: String? = null
+  var accsCtry: String? = null
+  var regn: String? = null
+  var city: String? = null
+  var zipCode: String? = null
+  var frstName: String? = null
+  var midlName: String? = null
+  var lastName: String? = null
+  var addrLine1: String? = null
+  var addrLine2: String? = null
+
+  var adltVrfys: MutableSet<String> = mutableSetOf(UserAgeVerify.NOT_VERIFIED)
+  var adltVrfyResn: String? = null
+  var emalVrfy: Boolean? = false
+  var rfshTokn: String? = null
+  var setPassLatr: Boolean = true
+  var crtrAvtg: String? = CreatorAdvantage.NONE
   var dormDttm: LocalDateTime? = null
   var wtwlDttm: LocalDateTime? = null
-
+  var pushKey: String? = null
 
   companion object: PanacheMongoCompanion<CstmUser> {
+
+    fun isEqual(first: CstmUser, other: CstmUser): Boolean {
+      return first.userId == other.userId && first.userStts == other.userStts
+    }
 
     fun findByIdAndPswd(userId: String, pswd: String): PanacheQuery<CstmUser> {
       // Todo: JWT 토큰 생성
@@ -113,17 +129,17 @@ class CstmUser : PanacheMongoEntity, AuthUser {
       param.persist()
     }
 
-    fun getUsers(param: CstmUserSearchRqst): List<CstmUser> {
+    fun getUsers(param: CstmUserSrchRqst): List<CstmUser> {
       val (query, params) = buildQueryAndParams(param)
-      return find(query, Sort.by("rgstDttm").descending(), params).page(param.page - 1, 20).list()
+      return CstmUser.find(query, Sort.by("rgstDttm").descending(), params).page(param.page - 1, 20).list()
     }
 
-    fun countUsers(param: CstmUserSearchRqst): Long {
+    fun countUsers(param: CstmUserSrchRqst): Long {
       val (query, params) = buildQueryAndParams(param)
-      return count(query, params)
+      return CstmUser.count(query, params)
     }
 
-    private fun buildQueryAndParams(param: CstmUserSearchRqst): Pair<String, MutableMap<String, Any?>> {
+    private fun buildQueryAndParams(param: CstmUserSrchRqst): Pair<String, MutableMap<String, Any?>> {
       val params = param.toRqstMap()
       val queryParts: MutableList<String> = ArrayList()
       if (params["dispName"] != null) queryParts.add("dispName like :dispName")
@@ -142,65 +158,92 @@ class CstmUser : PanacheMongoEntity, AuthUser {
       param.update()
     }
 
+    fun findByFirebaseId(id: String): CstmUser? {
+      return CstmUser.find("fbseUid = :fbseUid", Parameters.with("fbseUid", id)).firstResult()
+    }
+
+    fun findByUserId(userId: String): CstmUser? {
+      return CstmUser.find("userId = :userId", Parameters.with("userId", userId)).firstResult()
+    }
+
+    fun findByUserIdBasic(userId: String): UserBascRsps? {
+      return CstmUser.find("userId = :userId", Parameters.with("userId", userId))
+        .project(UserBascRsps::class.java).firstResult()
+    }
+
     fun removeAllByIds(ids: List<ObjectId>): Long {
       return CstmUser.delete("_id in ?1", ids)
     }
 
-    fun findByUserIdAndPswd(param: CstmUserSignInRqst): CstmUser? {
+    @Throws(CstmUserPswdNotSetException::class)
+    fun findByUserIdAndPswd(param: CstmUserEmalSginRqst): CstmUser? {
 
       val item = CstmUser.find("userId", param.userId).firstResult()
 
-      println("Found user at DB is " + item?.userId + " " + param.encPswd + " " + item?.pswd)
-
       if (item!=null) {
         // 1. if user with the userid found
+        println("Found user at DB is " + item.userId + " " + param.encPswd + " " + item.pswd)
+
+        if (item.pswd.isNullOrEmpty()) {
+          throw CstmUserPswdNotSetException(item.pvds)
+        }
 
         if (item.pswd != param.encPswd) {
           // 1). if password does not match
           //      - password wrong count + 1
           //      - return no user found or locked
           item.pwErrCnt = item.pwErrCnt.plus(1)
+
           if (item.userStts== UserStatus.ACTIVE && item.pwErrCnt > 4) {
             item.userStts = UserStatus.LOCKED
           }
-
-          item.updtDttm = LocalDateTime.now(ZoneOffset.UTC)
-          item.updtUserId = param.userId
-          item.update()
+          if (!param.ctnt.isNullOrBlank()) {
+            item.accsCtnt = param.ctnt
+          }
+          if (!param.ctry.isNullOrBlank()) {
+            item.accsCtry = param.ctry
+          }
 
           if (item.pwErrCnt < 5) {
             item.userStts = UserStatus.WRONG_PW
+          } else {
+            item.userStts = UserStatus.LOCKED
           }
 
+          item.lastAccsDttm = LocalDateTime.now(ZoneOffset.UTC)
+          item.update()
+
           // return as no user with the user info found
-          return if (item.pwErrCnt < 5) {
-            CstmUser(UserStatus.NOT_FOUND)
-          } else {
-            CstmUser(UserStatus.LOCKED)
-          }
+          return item
+
         } else {
 
           // 2) if password matched
-          if (item.userStts == UserStatus.ACTIVE) {
-            if (item.pwErrCnt > 4 ) {
-              item.userStts = UserStatus.LOCKED
-            } else {
-              // 1.1.1. if user status is active
-              item.pwErrCnt = 0
-            }
-          } else if (item.userStts == UserStatus.IN_REQUEST) {
+          if (item.userStts == UserStatus.ACTIVE && item.pwErrCnt < 5) {
+            // 1.1.1. if user status is active
+            item.pwErrCnt = 0
+          } else if (item.userStts == UserStatus.LOCKED) {
           } else if (item.userStts == UserStatus.BANNED) {
           } else if (item.userStts == UserStatus.DORMANCY) {
           } else if (item.userStts == UserStatus.WITHDRAWAL) {
+//        } else if (item.userStts == UserStatus.IN_REQUEST) {
           } else {
           }
 
+
+          if (!param.ctnt.isNullOrBlank()) {
+            item.accsCtnt = param.ctnt
+          }
+          if (!param.ctry.isNullOrBlank()) {
+            item.accsCtry = param.ctry
+          }
+
           // 1.1.2. stts - RQST, BNED, WTWL, DORM, LKED
-          item.updtDttm = LocalDateTime.now(ZoneOffset.UTC)
-          item.updtUserId = param.userId
-          item.lastAccDttm = LocalDateTime.now(ZoneOffset.UTC)
+          item.lastAccsDttm = LocalDateTime.now(ZoneOffset.UTC)
           item.update()
         }
+      } else {
+        println("Cstm user not found { userId: " + item?.userId + ", encPswd: " + param.encPswd + " != " + item?.pswd + "}")
       }
       // 2. if no user with the userid found
       return item
@@ -209,3 +252,6 @@ class CstmUser : PanacheMongoEntity, AuthUser {
   }
 
 }
+
+@NoArg
+data class CstmUserToknData(val encToknVlue: String, val userId: String, val fingerprint: String, var prvsVlue: String? = null)

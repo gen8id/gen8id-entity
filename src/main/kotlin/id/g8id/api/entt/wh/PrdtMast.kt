@@ -1,4 +1,4 @@
-package id.g8id.api.entt.wh.entt
+package id.g8id.api.entt.wh
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion

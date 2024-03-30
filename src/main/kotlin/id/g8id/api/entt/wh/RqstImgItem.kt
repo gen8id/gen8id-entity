@@ -1,6 +1,6 @@
-package id.g8id.api.bo.entt
+package id.g8id.api.entt.wh
 
-import id.g8id.api.bo.cnst.CtntAgeGrade
+import id.g8id.api.cnst.ContentAgeGrade
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import java.text.DecimalFormat
@@ -46,7 +46,7 @@ class RqstImgItem : PanacheMongoEntity {
     this.pblcBigUrl = pblcBigUrl
     this.aiSgstKywdList = aiSgstKywdList
     this.cptn = cptn
-    this.adjtResl = (wdth.toDouble() * hegt.toDouble() * (qltyFcus?.toDouble() ?: 0)).toLong()
+    this.adjtResl = (wdth.toDouble() * hegt.toDouble() * (qltyFcus ?: 1.0)).toLong()
     this.qltyFcus = qltyFcus
     this.pblcThumUrl = pblcThumUrl
     this.rgstUserId = rgstId
@@ -85,7 +85,7 @@ class RqstImgItem : PanacheMongoEntity {
   var aprvUserId: String? = null
   var aprvDttm: LocalDateTime? = null
 
-  var ctntAgeGrad: String = CtntAgeGrade.EVERYONE
+  var ctntAgeGrad: String = ContentAgeGrade.EVERYONE
   var celbCtnt: Boolean? = false
   var prsnCnt: Int = 0
   var aiSgstKywdList: List<String>? = null

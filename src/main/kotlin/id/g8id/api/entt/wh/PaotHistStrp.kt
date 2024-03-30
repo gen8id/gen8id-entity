@@ -1,4 +1,4 @@
-package id.g8id.api.entt.wh.entt
+package id.g8id.api.entt.wh
 
 import id.g8id.api.data.StrpReversals
 import id.g8id.api.util.GsonExt

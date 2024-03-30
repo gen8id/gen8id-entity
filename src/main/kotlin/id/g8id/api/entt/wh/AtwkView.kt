@@ -1,7 +1,7 @@
-package id.g8id.api.bo.entt
+package id.g8id.api.entt.wh
 
 import id.g8id.api.util.TimeUtil
-import id.g8id.api.bo.cnst.CONTENT_TYPE_SHORT_ARR
+import id.g8id.api.cnst.CONTENT_TYPE_SHORT_ARR
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoCompanion
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import org.bson.types.ObjectId
